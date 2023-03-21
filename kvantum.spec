@@ -38,7 +38,7 @@ cd %{_builddir}/Kvantum-%{version}
 
 %build
 export LANG=C.UTF-8
-mkdir -p clr-build
+mkdir -p Kvantum
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -54,7 +54,7 @@ popd
 
 %install
 rm -rf %{buildroot}
-pushd clr-build
+pushd Kvantum
 %make_install
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
 popd
