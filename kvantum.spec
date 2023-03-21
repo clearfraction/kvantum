@@ -38,8 +38,7 @@ cd %{_builddir}/Kvantum-%{version}
 
 %build
 export LANG=C.UTF-8
-mkdir -p Kvantum
-pushd clr-build
+pushd Kvantum
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -48,7 +47,7 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
-%cmake ..
+%cmake
 make  %{?_smp_mflags}
 popd
 
