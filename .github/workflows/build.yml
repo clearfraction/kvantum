@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: lhotari/action-upterm@v1
       - name: Building a package
         run: |
           curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/build-core.sh && chmod +x build-core.sh
