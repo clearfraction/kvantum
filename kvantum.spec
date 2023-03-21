@@ -2,7 +2,7 @@ Name     : kvantum
 Version  : 1.0.9
 Release  : 1
 URL      : https://github.com/tsujan/Kvantum/
-Source0  : https://github.com/tsujan/%{name}/releases/download/%{version}/%{name}-%{version}.tar.xz
+Source0  : https://github.com/tsujan/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Summary  : A Linux SVG-based theme engine for Qt and KDE
 Group    : Development/Tools
 License  : GPLv3
