@@ -57,10 +57,10 @@ rm -rf %{buildroot}
 pushd clr-build
 %make_install
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
-%find_lang %{name} --all-name --with-qt
+%find_lang Kvantum --all-name --with-qt
 popd
 
-%files -n %{name}.lang
+%files -n Kvantum.lang
 %defattr(-,root,root,-)
 /usr/bin/kvantummanager
 /usr/bin/kvantumpreview
