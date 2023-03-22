@@ -13,8 +13,8 @@ BuildRequires : xkbcomp-dev
 BuildRequires : chrpath
 BuildRequires : qttools-dev kwindowsystem-dev
 BuildRequires : qtbase-dev qtsvg-dev qtx11extras-dev
-BuildRequires:  Vulkan-Loader-dev Vulkan-Loader 
-BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
+BuildRequires : Vulkan-Loader-dev Vulkan-Loader 
+BuildRequires : Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
 BuildRequires : pkgconfig(wayland-client)
 BuildRequires : pkgconfig(wayland-cursor)
 BuildRequires : pkgconfig(wayland-protocols)
@@ -36,6 +36,11 @@ on elegance, usability and practicality.
 %setup -q -n Kvantum-%{version}
 # Fix Qt6 build with Qt5 installed
 sed -e 's|Qt6 Qt5|Qt6|' -i Kvantum/*/CMakeLists.txt
+# Fix DATADIR path
+sed -i 's|DATADIR =$$PREFIX/share|DATADIR =/opt/3rd-party/bundles/clearfraction/usr/share|g' Kvantum/style/style.pro
+sed -i 's|DATADIR =$$PREFIX/share|DATADIR =/opt/3rd-party/bundles/clearfraction/usr/share|g' Kvantum/kvantumpreview/kvantumpreview.pro
+sed -i 's|DATADIR =$$PREFIX/share|DATADIR =/opt/3rd-party/bundles/clearfraction/usr/share|g' Kvantum/kvantummanager/kvantummanager.pro
+
 
 %build
 export LANG=C.UTF-8
@@ -47,9 +52,6 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
-#pushd Kvantum
-#%%cmake .
-#make  %%{?_smp_mflags}
   cmake -B build5 -S Kvantum \
     -DCMAKE_INSTALL_PREFIX=/usr
   make -j4 -C build5
@@ -60,11 +62,8 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
   make -j4 -C build6
 
 %install
-#rm -rf %%{buildroot}
 DESTDIR=%{buildroot} cmake --install build5 
 DESTDIR=%{buildroot} cmake --install build6
-#pushd Kvantum
-#%%make_install
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
 
 %files
