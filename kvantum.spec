@@ -36,10 +36,6 @@ on elegance, usability and practicality.
 %setup -q -n Kvantum-%{version}
 # Fix Qt6 build with Qt5 installed
 sed -e 's|Qt6 Qt5|Qt6|' -i Kvantum/*/CMakeLists.txt
-# Fix DATADIR path
-sed -i 's|DATADIR =$$PREFIX/share|DATADIR =/opt/3rd-party/bundles/clearfraction/usr/share|g' Kvantum/style/style.pro
-sed -i 's|DATADIR =$$PREFIX/share|DATADIR =/opt/3rd-party/bundles/clearfraction/usr/share|g' Kvantum/kvantumpreview/kvantumpreview.pro
-sed -i 's|DATADIR =$$PREFIX/share|DATADIR =/opt/3rd-party/bundles/clearfraction/usr/share|g' Kvantum/kvantummanager/kvantummanager.pro
 
 
 %build
@@ -53,11 +49,11 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
   cmake -B build5 -S Kvantum \
-    -DCMAKE_INSTALL_PREFIX=/usr
+    -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr 
   make -j4 -C build5
 
   cmake -B build6 -S Kvantum \
-    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr \
     -DENABLE_QT5=OFF
   make -j4 -C build6
 
