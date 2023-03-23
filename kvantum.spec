@@ -60,6 +60,8 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %install
 DESTDIR=%{buildroot} cmake --install build5 
 DESTDIR=%{buildroot} cmake --install build6
+mv %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}
+rm -rf %{buildroot}/opt
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
 
 %files
