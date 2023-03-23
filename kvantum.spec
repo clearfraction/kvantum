@@ -8,7 +8,7 @@ Group    : Development/Tools
 License  : GPLv3
 BuildRequires : cmake
 BuildRequires : mesa-dev
-BuildRequires : qtbase-dev qt6base-dev
+BuildRequires : qtbase-dev
 BuildRequires : xkbcomp-dev
 BuildRequires : chrpath
 BuildRequires : qttools-dev kwindowsystem-dev
@@ -52,14 +52,14 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
     -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr 
   make -j4 -C build5
 
-  cmake -B build6 -S Kvantum \
-    -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr \
-    -DENABLE_QT5=OFF
-  make -j4 -C build6
+  #cmake -B build6 -S Kvantum \
+  #  -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr \
+  #  -DENABLE_QT5=OFF
+  #make -j4 -C build6
 
 %install
 DESTDIR=%{buildroot} cmake --install build5 
-DESTDIR=%{buildroot} cmake --install build6
+#DESTDIR=%{buildroot} cmake --install build6
 cp -afr %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}/
 rm -rf %{buildroot}/opt
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
