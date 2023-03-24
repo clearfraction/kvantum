@@ -35,7 +35,7 @@ on elegance, usability and practicality.
 %prep
 %setup -q -n Kvantum-%{version}
 # Fix Qt6 build with Qt5 installed
-sed -e 's|Qt6 Qt5|Qt6|' -i Kvantum/*/CMakeLists.txt
+# sed -e 's|Qt6 Qt5|Qt6|' -i Kvantum/*/CMakeLists.txt
 
 
 %build
