@@ -48,18 +48,18 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
-  cmake -B build5 -S Kvantum \
-    -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr 
-  make -j4 -C build5
+  #cmake -B build5 -S Kvantum \
+  #  -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr 
+  #make -j4 -C build5
 
-  #cmake -B build6 -S Kvantum \
-  #  -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr \
-  #  -DENABLE_QT5=OFF
-  #make -j4 -C build6
+  cmake -B build6 -S Kvantum \
+    -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr \
+    -DENABLE_QT5=OFF
+  make -C build6
 
 %install
-DESTDIR=%{buildroot} cmake --install build5 
-#DESTDIR=%{buildroot} cmake --install build6
+#DESTDIR=%{buildroot} cmake --install build5 
+DESTDIR=%{buildroot} cmake --install build6
 cp -afr %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}/
 rm -rf %{buildroot}/opt
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
