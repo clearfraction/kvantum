@@ -61,7 +61,7 @@ DESTDIR=%{buildroot} cmake --install build6
 cp -afr %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}/
 rm -rf %{buildroot}/opt
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
-sed -i "s|Exec=kvantummanager|Exec=env QT_PLUGIN_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/qt5/plugins/:/usr/lib64/qt5/plugins LD_LIBRARY_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/:\$LD_LIBRARY_PATH kvantummanager|"  %{buildroot}/usr/share/applications/kvantummanager.desktop
+sed -i "s|Exec=kvantummanager|Exec=env QT_PLUGIN_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/qt5/plugins:/opt/3rd-party/bundles/clearfraction/usr/lib64/qt6/plugins:/usr/lib64/qt5/plugins LD_LIBRARY_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/:\$LD_LIBRARY_PATH kvantummanager|"  %{buildroot}/usr/share/applications/kvantummanager.desktop
 
 
 %files
