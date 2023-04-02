@@ -33,7 +33,7 @@ on elegance, usability and practicality.
 
 %prep
 %setup -q -n Kvantum-%{version}
-sed -e 's|Qt6 Qt5|Qt6|' -i Kvantum/*/CMakeLists.txt
+# sed -e 's|Qt6 Qt5|Qt6|' -i Kvantum/*/CMakeLists.txt
 
 
 %build
@@ -58,7 +58,6 @@ make -C build6
 %install
 DESTDIR=%{buildroot} cmake --install build5 
 DESTDIR=%{buildroot} cmake --install build6
-ls -lR %{buildroot}
 cp -afr %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}/
 rm -rf %{buildroot}/opt
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
