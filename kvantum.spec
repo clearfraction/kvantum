@@ -56,7 +56,8 @@ cmake -B build6 -S Kvantum \
 make -C build6
 
 %install
-DESTDIR=%{buildroot} cmake --install build5 
+DESTDIR=%{buildroot} cmake --install build5
+ls -lR build6
 DESTDIR=%{buildroot} cmake --install build6
 cp -afr %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}/
 rm -rf %{buildroot}/opt
