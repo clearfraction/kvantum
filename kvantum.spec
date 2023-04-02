@@ -10,11 +10,10 @@ BuildRequires : cmake
 BuildRequires : mesa-dev
 BuildRequires : qt6base-dev
 BuildRequires : xkbcomp-dev
-BuildRequires : chrpath
 BuildRequires : qttools-dev kwindowsystem-dev
-BuildRequires : qtbase-dev qtsvg-dev qtx11extras-dev
-BuildRequires : Vulkan-Loader-dev Vulkan-Loader 
-BuildRequires : Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
+BuildRequires : qtsvg-dev qtx11extras-dev
+BuildRequires : Vulkan-Loader-dev 
+BuildRequires : Vulkan-Headers-dev
 BuildRequires : pkgconfig(wayland-client)
 BuildRequires : pkgconfig(wayland-cursor)
 BuildRequires : pkgconfig(wayland-protocols)
@@ -34,9 +33,6 @@ on elegance, usability and practicality.
 
 %prep
 %setup -q -n Kvantum-%{version}
-# Fix Qt6 build with Qt5 installed
-# sed -e 's|Qt6 Qt5|Qt6|' -i Kvantum/*/CMakeLists.txt
-
 
 %build
 export LANG=C.UTF-8
@@ -58,7 +54,6 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
   make -C build6
 
 %install
-#DESTDIR=%{buildroot} cmake --install build5 
 DESTDIR=%{buildroot} cmake --install build6
 cp -afr %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}/
 rm -rf %{buildroot}/opt
