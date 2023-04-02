@@ -8,7 +8,7 @@ Group    : Development/Tools
 License  : GPLv3
 BuildRequires : cmake
 BuildRequires : mesa-dev
-BuildRequires : qt6base-dev
+BuildRequires : qtbase-dev qt5base-dev
 BuildRequires : xkbcomp-dev
 BuildRequires : qttools-dev kwindowsystem-dev
 BuildRequires : qtsvg-dev qtx11extras-dev
@@ -33,6 +33,8 @@ on elegance, usability and practicality.
 
 %prep
 %setup -q -n Kvantum-%{version}
+sed -e 's|Qt6 Qt5|Qt6|' -i Kvantum/*/CMakeLists.txt
+
 
 %build
 export LANG=C.UTF-8
@@ -44,14 +46,21 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+cmake -B build5 -S Kvantum \
+    -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr 
+make -C build5
+
 cmake -B build6 -S Kvantum \
     -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr \
     -DENABLE_QT5=OFF
 make -C build6
 
 %install
+DESTDIR=%{buildroot} cmake --install build5 
 DESTDIR=%{buildroot} cmake --install build6
 ls -lR %{buildroot}
+cp -afr %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}/
+rm -rf %{buildroot}/opt
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
 sed -i "s|Exec=kvantummanager|Exec=env QT_PLUGIN_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/qt5/plugins/:/usr/lib64/qt5/plugins LD_LIBRARY_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/:\$LD_LIBRARY_PATH kvantummanager|"  %{buildroot}/usr/share/applications/kvantummanager.desktop
 
