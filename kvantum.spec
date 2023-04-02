@@ -56,11 +56,11 @@ cmake -B build6 -S Kvantum \
 make -C build6
 
 %install
-DESTDIR=%{buildroot} cmake --install build5
-ls -lR build6
-DESTDIR=%{buildroot} cmake --install build6
+DESTDIR=%{buildroot} cmake --install build5 
 cp -afr %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}/
 rm -rf %{buildroot}/opt
+# doesn't works DESTDIR=%%{buildroot} cmake --install build6
+install -Dm644 build6/styles/libkvantum.so %{buildroot}/usr/lib64/qt6/plugins/styles/libkvantum.so
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
 sed -i "s|Exec=kvantummanager|Exec=env QT_PLUGIN_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/qt5/plugins:/opt/3rd-party/bundles/clearfraction/usr/lib64/qt6/plugins:/usr/lib64/qt5/plugins LD_LIBRARY_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/:\$LD_LIBRARY_PATH kvantummanager|"  %{buildroot}/usr/share/applications/kvantummanager.desktop
 
