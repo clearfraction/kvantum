@@ -8,7 +8,7 @@ Group    : Development/Tools
 License  : GPLv3
 BuildRequires : cmake
 BuildRequires : mesa-dev
-BuildRequires : qtbase-dev
+BuildRequires : qt6base-dev
 BuildRequires : xkbcomp-dev
 BuildRequires : chrpath
 BuildRequires : qttools-dev kwindowsystem-dev
