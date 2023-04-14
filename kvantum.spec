@@ -1,5 +1,5 @@
 Name     : kvantum
-Version  : 1.0.9
+Version  : 1.0.10
 Release  : 1
 URL      : https://github.com/tsujan/Kvantum
 Source0  : https://github.com/tsujan/Kvantum/archive/V%{version}/%{name}-%{version}.tar.gz
@@ -34,8 +34,6 @@ on elegance, usability and practicality.
 
 %prep
 %setup -q -n Kvantum-%{version}
-# Fix Qt6 build with Qt5 installed
-# sed -e 's|Qt6 Qt5|Qt6|' -i Kvantum/*/CMakeLists.txt
 
 
 %build
@@ -48,22 +46,18 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
-  cmake -B build5 -S Kvantum \
+cmake -B build5 -S Kvantum \
     -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr 
-  make -j4 -C build5
+make -C build5
 
-  #cmake -B build6 -S Kvantum \
-  #  -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr \
-  #  -DENABLE_QT5=OFF
-  #make -j4 -C build6
+
 
 %install
 DESTDIR=%{buildroot} cmake --install build5 
-#DESTDIR=%{buildroot} cmake --install build6
 cp -afr %{buildroot}/opt/3rd-party/bundles/clearfraction/usr %{buildroot}/
 rm -rf %{buildroot}/opt
 sed -i "s|LXQt|X-LXQt|" %{buildroot}/usr/share/applications/kvantummanager.desktop
-sed -i "s|Exec=kvantummanager|Exec=env QT_PLUGIN_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/qt5/plugins/:/usr/lib64/qt5/plugins LD_LIBRARY_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/:\$LD_LIBRARY_PATH kvantummanager|"  %{buildroot}/usr/share/applications/kvantummanager.desktop
+sed -i "s|Exec=kvantummanager|Exec=env QT_PLUGIN_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64/qt5/plugins:/usr/lib64/qt5/plugins LD_LIBRARY_PATH=/opt/3rd-party/bundles/clearfraction/usr/lib64:\$LD_LIBRARY_PATH kvantummanager|"  %{buildroot}/usr/share/applications/kvantummanager.desktop
 
 
 %files
@@ -71,10 +65,9 @@ sed -i "s|Exec=kvantummanager|Exec=env QT_PLUGIN_PATH=/opt/3rd-party/bundles/cle
 /usr/bin/kvantummanager
 /usr/bin/kvantumpreview
 /usr/share/applications/kvantummanager.desktop
-/usr/share/Kvantum/
+/usr/share/Kvantum
 /usr/share/kvantumpreview
 /usr/share/kvantummanager
-/usr/share/themes/Kv*/
 /usr/share/color-schemes/
 /usr/share/icons/
 /usr/lib64/
