@@ -52,7 +52,7 @@ make -C build5
 
 cmake -B build6 -S Kvantum \
     -DCMAKE_INSTALL_PREFIX=/opt/3rd-party/bundles/clearfraction/usr \
-    -DENABLE_QT5=OFF
+    -DENABLE_QT5=OFF -DQT_DEBUG_FIND_PACKAGE=ON
 make -C build6
 
 %install
