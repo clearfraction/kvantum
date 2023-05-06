@@ -6,7 +6,8 @@ Source0  : https://github.com/tsujan/Kvantum/archive/V%{version}/%{name}-%{versi
 Summary  : A Linux SVG-based theme engine for Qt and KDE
 Group    : Development/Tools
 License  : GPLv3
-BuildRequires : cmake
+BuildRequires : buildreq-cmake
+BuildRequires : buildreq-qmake
 BuildRequires : mesa-dev
 BuildRequires : qtbase-dev qt6base-dev
 BuildRequires : xkbcomp-dev
