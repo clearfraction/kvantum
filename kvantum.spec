@@ -1,5 +1,5 @@
 Name     : kvantum
-Version  : 1.0.9
+Version  : 1.0.10
 Release  : 1
 URL      : https://github.com/tsujan/Kvantum
 Source0  : https://github.com/tsujan/Kvantum/archive/V%{version}/%{name}-%{version}.tar.gz
@@ -9,10 +9,12 @@ License  : GPLv3
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-qmake
 BuildRequires : mesa-dev
-BuildRequires : qtbase-dev qt6base-dev
-BuildRequires : xkbcomp-dev
+BuildRequires : qt6base-dev
+BuildRequires : qt6svg-dev qt6tools-dev
+BuildRequires : qtbase-dev 
 BuildRequires : qttools-dev kwindowsystem-dev
 BuildRequires : qtsvg-dev qtx11extras-dev
+BuildRequires : xkbcomp-dev
 BuildRequires : Vulkan-Loader-dev 
 BuildRequires : Vulkan-Headers-dev
 BuildRequires : pkgconfig(wayland-client)
@@ -74,7 +76,6 @@ sed -i "s|Exec=kvantummanager|Exec=env QT_PLUGIN_PATH=/opt/3rd-party/bundles/cle
 /usr/share/Kvantum/
 /usr/share/kvantumpreview
 /usr/share/kvantummanager
-/usr/share/themes/Kv*/
 /usr/share/color-schemes/
 /usr/share/icons/
 /usr/lib64/
