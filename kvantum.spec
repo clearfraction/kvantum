@@ -1,5 +1,5 @@
 Name     : kvantum
-Version  : 1.1.3
+Version  : 1.1.4
 Release  : 1
 URL      : https://github.com/tsujan/Kvantum
 Source0  : https://github.com/tsujan/Kvantum/archive/V%{version}/%{name}-%{version}.tar.gz
